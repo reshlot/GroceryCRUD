@@ -8,12 +8,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.Entity;
+using System.IO;
 
 namespace GroceryAPP
 {
     public partial class Addproducts : System.Web.UI.Page
     {
-        //string cs = ConfigurationManager.ConnectionStrings["GroceryDB"].ConnectionString;
+        
+            string connectionString = "Server=RESHULOTUS;Database=GroceryDB;Trusted_Connection=True;Integrated Security=SSPI;Connection Timeout=30;";
+          
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -22,34 +25,51 @@ namespace GroceryAPP
         //final add button for addproductspage
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string connectionString = "server = RESHULIOTUS; database = GroceryDB; trusted_connection = true;") // Replace with your database connection string
-            using (SqlConnection con = new SqlConnection(connectionString))
+
+            // Retrieve user input from TextBox controls
+            int categoryID = Convert.ToInt32(txtCategoryID.Text); // Assuming you have a TextBox for CategoryID
+            string productImage = txtProductImage.Text; // TextBox for ProductImage
+            string productName = txtProductName.Text; // TextBox for ProductName
+            decimal productPrice = Convert.ToDecimal(txtProductPrice.Text); // TextBox for ProductPrice
+
+            // Create a SQL connection and command
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                con.Open();
-                string query = "INSERT INTO Products (ProductName, ProductPrice) VALUES (@ProductName, @ProductPrice)";
+                connection.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                // Construct the SQL query (use parameterized queries for security)
+                string query = "INSERT INTO Products (CategoryID, ProductImage, ProductName, ProductPrice) " +
+                               "VALUES (@CategoryID, @ProductImage, @ProductName, @ProductPrice)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@ProductName", productNameTextBox.Text);
-                    cmd.Parameters.AddWithValue("@ProductPrice", productPriceTextBox.Text);
+                    // Add parameters to the query
+                    command.Parameters.AddWithValue("@CategoryID", categoryID);
+                    command.Parameters.AddWithValue("@ProductImage", productImage);
+                    command.Parameters.AddWithValue("@ProductName", productName);
+                    command.Parameters.AddWithValue("@ProductPrice", productPrice);
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
 
-                    if (rowsAffected > 0)
-                    {
-                        Response.Write("<script>alert('Product has been submitted successfully');</script>");
-                    }
+                    // Execute the query
+                    command.ExecuteNonQuery();
                 }
             }
 
 
-
-
-
-
-
         }
 
+
+        
     }
+
     
 }
+
+
+
+
+
+
+
+
+

@@ -24,6 +24,15 @@ namespace GroceryAPP
         protected global::System.Web.UI.WebControls.Label categoryIdLabel;
 
         /// <summary>
+        /// categoryValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator categoryValidator;
+
+        /// <summary>
         /// categoryDropDown control.
         /// </summary>
         /// <remarks>
@@ -33,22 +42,40 @@ namespace GroceryAPP
         protected global::System.Web.UI.WebControls.DropDownList categoryDropDown;
 
         /// <summary>
-        /// productImageLabel control.
+        /// imageLinkLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label productImageLabel;
+        protected global::System.Web.UI.WebControls.Label imageLinkLabel;
 
         /// <summary>
-        /// f1 control.
+        /// imageLinkTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload f1;
+        protected global::System.Web.UI.WebControls.TextBox imageLinkTextBox;
+
+        /// <summary>
+        /// rfvImageLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvImageLink;
+
+        /// <summary>
+        /// revImageLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revImageLink;
 
         /// <summary>
         /// productNameLabel control.
@@ -69,6 +96,15 @@ namespace GroceryAPP
         protected global::System.Web.UI.WebControls.TextBox productNameTextBox;
 
         /// <summary>
+        /// productNameValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator productNameValidator;
+
+        /// <summary>
         /// productPriceLabel control.
         /// </summary>
         /// <remarks>
@@ -85,6 +121,24 @@ namespace GroceryAPP
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox productPriceTextBox;
+
+        /// <summary>
+        /// productPriceValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator productPriceValidator;
+
+        /// <summary>
+        /// productPriceFormatValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator productPriceFormatValidator;
 
         /// <summary>
         /// LblMsg control.

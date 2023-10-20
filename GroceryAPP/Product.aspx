@@ -24,11 +24,26 @@
             height: 34px;
         }
 
-    </style>
+    .available-products-label {
+        color:mediumvioletred;
+        font-size: 40px;
+        font-weight: bold;
+        font-family:'Times New Roman', Times, serif;
+        text-align:center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10vh;
+    }
+</style>
 
-   
+
+  
+
+   <asp:Label ID="AvailableProductsLabel" runat="server" Text="Available products" CssClass="available-products-label" />
 
 
+    <br />
     <div>
         <div class="col-md-4">
             <asp:DropDownList ID="CategoryDropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="CategoryDropDown_SelectedIndexChanged">
@@ -56,15 +71,6 @@
     <br />
 
 
-
-
-    
-
-
-
-
-
-
     <div class="row">
         <table class="table table-bordered">
             <thead>
@@ -76,43 +82,85 @@
                 </tr>
             </thead>
             <tbody>
-                <asp:Repeater ID="ProductRepeater" runat="server">
+            <asp:Repeater ID="ProductRepeater" runat="server">
                     <ItemTemplate>
-                        <tr>
-                            <td>
-                                <asp:Image ID="ProductImage" runat="server" ImageUrl='<%# Eval("ProductImage") %>' CssClass="product-image" />
-                            </td>
-                            <td><%# Eval("ProductName") %></td>
-                            <td><%# Eval("Price", "{0:C}") %></td>
-                            <td>
-                                <asp:Button ID="EditButton" runat="server" Text="Edit" CssClass="btn btn-info mt-1" CommandName="Edit" CommandArgument='<%# Eval("ProductId") %>' />
+                       <tr>
+                         
 
+<ItemTemplate>
+    <tr>
+        <td>
+            <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("ProductImage") %>' CssClass="product-image" />
+        </td>
+        <td><%# Eval("ProductName") %></td>
+        <td><%# Eval("Price", "{0:C}") %></td>
+        <td>
+            <asp:LinkButton runat="server" CommandName="Edit" CssClass="btn btn-info" OnClientClick='<%# "toggleEdit(this.parentNode.parentNode); return false;" %>'>
+                Edit
+            </asp:LinkButton>
 
-            <asp:Button ID="SaveButton" runat="server" Text="Save" CssClass="btn btn-success" 
-                CommandName="Save" CommandArgument='<%# Eval("ProductId") %>' Visible="false" />
-            <asp:Button ID="CancelButton" runat="server" Text="Cancel" CssClass="btn btn-secondary" 
-                CommandName="Cancel" Visible="false" />
-            <asp:Button ID="DeleteButton" runat="server" Text="Delete" CssClass="btn btn-danger" 
-                CommandName="Delete" OnClientClick='<%# "return confirm(\u0027Are you sure you want to delete this product?\u0027)" %>' />
-
-  <asp:Button ID="AddToCartButton" runat="server" Text="Add to Cart" CssClass="btn btn-primary" CommandName="AddToCart" CommandArgument='<%# Eval("ProductId") %>' />
-                               
-                            
-                            
-    <%--                        
-      <ItemTemplate>
-    <asp:LinkButton runat="server" CommandName="Delete" CssClass="btn btn-danger"
-        OnClientClick='<%# "return confirm(\u0027Are you sure you want to delete this product?\u0027)" %>'>
-        Delete
-    </asp:LinkButton>
-</ItemTemplate>--%>
+            <asp:Button ID="SaveButton" runat="server" Text="Save" Visible="true" CssClass="btn btn-success" CommandName="Save" Style="display: none;" CommandArgument='<%# Eval("ProductId") %>' />
+            <asp:Button ID="CancelButton" runat="server" Text="Cancel" CssClass="btn btn-secondary" CommandName="Cancel" Style="display: none;" />      
+            <asp:Button ID="DeleteButton" runat="server" Text="Delete" CssClass="btn btn-danger" CommandName="Delete" OnClientClick='<%# "return confirm(\u0027Are you sure you want to delete this product?\u0027)" %>' />
         
-                            
-                            </td>
+        </td>
+    </tr>
+</ItemTemplate>
+
+<script type="text/javascript">
+    function toggleEdit(row) {
+        var editButton = row.querySelector('.btn-info');
+        var saveButton = row.querySelector('.btn-success');
+        var cancelButton = row.querySelector('.btn-secondary');
+        var deleteButton = row.querySelector('.btn-danger');
+        var productName = row.querySelector('.product-name');
+        var price = row.querySelector('.price');
+
+        if (editButton.style.display !== "none") {
+            editButton.style.display = "none";
+            saveButton.style.display = "inline";
+            cancelButton.style.display = "inline";
+            deleteButton.style.display = "none";
+            productName.contentEditable = true;
+            price.contentEditable = true;
+            productName.focus();
+        } else {
+            editButton.style.display = "inline";
+            saveButton.style.display = "true";
+            cancelButton.style.display = "true";
+            deleteButton.style.display = "inline";
+            productName.contentEditable = true;
+            price.contentEditable = true;
+        }
+    }
+</script>
+
+
+
+
+
+       
+                     </td>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
             </tbody>
         </table>
+
+    
+
+
     </div>
 </asp:Content>
+
+
+
+
+
+
+
+
+
+
+
+
